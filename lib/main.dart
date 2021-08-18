@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
+import 'package:firstmile/login.dart';
 void main() {
   runApp(MyApp());
 }
@@ -40,9 +40,9 @@ class _MyHomePageState extends State<MyHomePage> {
             Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                loginButton(),
+                loginButton(context),
                 SizedBox(
-                  height: 15.0,
+                  height: 10,
                 ),
                 registerClick()
               ],
@@ -54,12 +54,28 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-Widget loginButton() {
+
+Widget logoWelcome() {
+  return Image.network(
+    'https://www.img.in.th/images/5a240db816ba4f39ee27b5d6182ae024.png',
+    width: 320,
+    height: 150,
+  );
+}
+
+
+Widget loginButton(BuildContext context) {
   return ButtonTheme(
-    minWidth: 320.0,
-    height: 69.0,
+    minWidth: 330.0,
+    height: 55.0,
     child: RaisedButton(
-      onPressed: () {},
+      onPressed: () {
+        print('You Click Sign Up');
+
+        MaterialPageRoute materialPageRoute =
+            MaterialPageRoute(builder: (BuildContext context) => logIn());
+        Navigator.of(context).push(materialPageRoute);
+      },
       shape: new RoundedRectangleBorder(
         borderRadius: new BorderRadius.circular(15.0),
       ),
@@ -76,22 +92,13 @@ Widget loginButton() {
   );
 }
 
-Widget logoWelcome() {
-  return Image.network(
-    'https://www.img.in.th/images/5a240db816ba4f39ee27b5d6182ae024.png',
-    width: 320,
-    height: 150,
-  );
-}
-
-
 Widget registerClick() {
   return Center(
       child: RichText(
           textAlign: TextAlign.center,
           text: TextSpan(children: [
             TextSpan(
-              text: "Sing up here",
+              text: "Sing up here ",
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 15.0,
@@ -99,12 +106,12 @@ Widget registerClick() {
               ),
             ),
             TextSpan(
-              text: " Register New ",
+              text: "Register new ",
               style: TextStyle(
                 fontSize: 15.0,
                 color: Colors.blue,
                 fontWeight: FontWeight.bold,
-                decoration: TextDecoration.underline, 
+                decoration: TextDecoration.underline,
               ),
             ),
           ])));
