@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:firstmile/home.dart';
+import 'package:firstmile/screen/home.dart';
 
 class logIn extends StatefulWidget {
   @override
@@ -9,8 +9,10 @@ class logIn extends StatefulWidget {
 class _logInState extends State<logIn> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Login"),
+      ),
     );
   }
 }

@@ -1,6 +1,8 @@
-import 'package:flutter/foundation.dart';
+import 'package:firstmile/screen/register.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:firstmile/login.dart';
+import 'package:firstmile/screen/login.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -35,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
               children: <Widget>[logoWelcome()],
             ),
             SizedBox(
-              height: 200,
+              height: 170,
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -44,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(
                   height: 10,
                 ),
-                registerClick()
+                registerClick(context)
               ],
             ),
           ],
@@ -54,15 +56,10 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-
 Widget logoWelcome() {
-  return Image.network(
-    'https://www.img.in.th/images/5a240db816ba4f39ee27b5d6182ae024.png',
-    width: 320,
-    height: 150,
-  );
+  return Container(
+      width: 180.0, height: 180.0, child: Image.asset('images/logo.jpg'));
 }
-
 
 Widget loginButton(BuildContext context) {
   return ButtonTheme(
@@ -72,9 +69,9 @@ Widget loginButton(BuildContext context) {
       onPressed: () {
         print('You Click Sign Up');
 
-        MaterialPageRoute materialPageRoute =
-            MaterialPageRoute(builder: (BuildContext context) => logIn());
-        Navigator.of(context).push(materialPageRoute);
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return logIn();
+        }));
       },
       shape: new RoundedRectangleBorder(
         borderRadius: new BorderRadius.circular(15.0),
@@ -92,27 +89,26 @@ Widget loginButton(BuildContext context) {
   );
 }
 
-Widget registerClick() {
-  return Center(
-      child: RichText(
-          textAlign: TextAlign.center,
-          text: TextSpan(children: [
-            TextSpan(
-              text: "Sing up here ",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 15.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            TextSpan(
-              text: "Register new ",
-              style: TextStyle(
-                fontSize: 15.0,
-                color: Colors.blue,
-                fontWeight: FontWeight.bold,
-                decoration: TextDecoration.underline,
-              ),
-            ),
-          ])));
+Widget registerClick(BuildContext context) {
+  TextStyle defaultStyle = TextStyle(color: Colors.grey, fontSize: 15.0);
+  TextStyle linkStyle = TextStyle(color: Colors.blue);
+  return RichText(
+    text: TextSpan(
+      style: defaultStyle,
+      children: <TextSpan>[
+        TextSpan(text: 'Sing up here '),
+        TextSpan(
+            text: 'Register new',
+            style: linkStyle,
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                print("Register");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Register()),
+                );
+              }),
+      ],
+    ),
+  );
 }
